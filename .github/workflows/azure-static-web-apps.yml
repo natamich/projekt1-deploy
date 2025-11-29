@@ -27,7 +27,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           ###### Repository/Build Configurations ######
-          app_location: "/sample-app" # React app source
+          app_location: "sample-app" # React app source
           api_location: "" # No API
           output_location: "dist" # Vite build output
           skip_app_build: false # Build the React app
