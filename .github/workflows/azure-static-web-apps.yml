@@ -27,10 +27,10 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           ###### Repository/Build Configurations ######
-          app_location: "/" # Built files are in root
+          app_location: "/sample-app" # React app source
           api_location: "" # No API
-          output_location: "" # Files are already built
-          skip_app_build: true # Skip build - files are pre-built
+          output_location: "dist" # Vite build output
+          skip_app_build: false # Build the React app
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
