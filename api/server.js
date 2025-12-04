@@ -25,8 +25,8 @@ const dbConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     options: {
-        encrypt: false,
-        trustServerCertificate: true
+        encrypt: true,  // Required for Azure SQL
+        trustServerCertificate: false  // Use proper SSL for Azure
     }
 };
 
