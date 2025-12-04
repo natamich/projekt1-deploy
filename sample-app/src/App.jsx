@@ -43,7 +43,16 @@ function App() {
       console.error('Load values error:', err) // Debug log
       console.error('Error type:', err.name) // Debug log
       console.error('Error stack:', err.stack) // Debug log
-      setError(`Failed to load values: ${err.message} (Check console for details)`)
+      
+      // Fallback data if API is not available
+      console.log('Loading fallback data due to API error')
+      const fallbackData = [
+        { ID: 1, Name: 'Demo Item 1', Value: 'This is a demo value while API is connecting' },
+        { ID: 2, Name: 'Demo Item 2', Value: 'API deployment in progress - please refresh in a few minutes' },
+        { ID: 3, Name: 'Demo Item 3', Value: 'Contact support if this persists after 10 minutes' }
+      ]
+      setValues(fallbackData)
+      setError(`API Connection Issue: ${err.message} (Using demo data - Check console for details)`)
     } finally {
       setLoading(false)
     }
