@@ -15,15 +15,35 @@ function App() {
     try {
       setLoading(true)
       console.log('API_URL:', API_URL) // Debug log
-      const response = await fetch(`${API_URL}/values`)
+      console.log('Attempting fetch to:', `${API_URL}/values`) // Debug log
+      
+      const response = await fetch(`${API_URL}/values`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'cors'
+      })
+      
+      console.log('Response received:', response) // Debug log
       console.log('Response status:', response.status) // Debug log
-      if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      console.log('Response headers:', [...response.headers.entries()]) // Debug log
+      
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.log('Error response body:', errorText) // Debug log
+        throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`)
+      }
+      
       const data = await response.json()
       console.log('Data received:', data) // Debug log
       setValues(data)
+      setError('') // Clear any previous errors
     } catch (err) {
       console.error('Load values error:', err) // Debug log
-      setError('Failed to load values: ' + err.message)
+      console.error('Error type:', err.name) // Debug log
+      console.error('Error stack:', err.stack) // Debug log
+      setError(`Failed to load values: ${err.message} (Check console for details)`)
     } finally {
       setLoading(false)
     }
