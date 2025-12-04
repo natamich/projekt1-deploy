@@ -45,9 +45,11 @@ function App() {
       console.error('Error stack:', err.stack) // Debug log
       
       // Fallback data if API is not available
-      console.log('Loading fallback data due to API error')
+      console.log('Loading fallback data due to API error - Updated 2025-12-04')
+      console.log('Environment check - VITE_API_URL:', import.meta.env.VITE_API_URL)
+      console.log('Environment check - All env vars:', import.meta.env)
       const fallbackData = [
-        { ID: 1, Name: 'Demo Item 1', Value: 'This is a demo value while API is connecting' },
+        { ID: 1, Name: 'Demo Item 1 (Updated)', Value: 'This is a demo value while API is connecting - v2' },
         { ID: 2, Name: 'Demo Item 2', Value: 'API deployment in progress - please refresh in a few minutes' },
         { ID: 3, Name: 'Demo Item 3', Value: 'Contact support if this persists after 10 minutes' }
       ]
@@ -115,7 +117,8 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>Database Test Application</h1>
+        <h1>Database Test Application (v2.2 - Updated 2025-12-04)</h1>
+        <p style={{fontSize: '12px', color: '#666'}}>API URL: {import.meta.env.VITE_API_URL || 'localhost fallback'}</p>
         <p>Connected to SQL Server - TestTable</p>
       </header>
 
