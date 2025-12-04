@@ -117,8 +117,13 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>Database Test Application (v2.2 - Updated 2025-12-04)</h1>
-        <p style={{fontSize: '12px', color: '#666'}}>API URL: {import.meta.env.VITE_API_URL || 'localhost fallback'}</p>
+        <h1>🔥 PROJEKT1 - DATABASE VALUES (UPDATED!) 🔥</h1>
+        <p style={{fontSize: '14px', color: '#333', fontWeight: 'bold'}}>
+          API URL: {import.meta.env.VITE_API_URL || 'localhost fallback'}
+        </p>
+        <p style={{fontSize: '12px', color: '#0066cc'}}>
+          Deployment Test: {new Date().toLocaleString('sv-SE')}
+        </p>
         <p>Connected to SQL Server - TestTable</p>
       </header>
 
