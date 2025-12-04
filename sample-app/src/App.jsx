@@ -14,11 +14,15 @@ function App() {
   const loadValues = async () => {
     try {
       setLoading(true)
+      console.log('API_URL:', API_URL) // Debug log
       const response = await fetch(`${API_URL}/values`)
-      if (!response.ok) throw new Error('Failed to load values')
+      console.log('Response status:', response.status) // Debug log
+      if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       const data = await response.json()
+      console.log('Data received:', data) // Debug log
       setValues(data)
     } catch (err) {
+      console.error('Load values error:', err) // Debug log
       setError('Failed to load values: ' + err.message)
     } finally {
       setLoading(false)
