@@ -1,0 +1,44 @@
+name: Deploy API to Azure Container Apps
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'api/**' ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Login to Azure Container Registry
+      run: |
+        az acr login --name projekt1registry
+
+    - name: Build and push Docker image
+      run: |
+        cd api
+        docker build -t projekt1registry.azurecr.io/projekt1-api:${{ github.sha }} .
+        docker build -t projekt1registry.azurecr.io/projekt1-api:latest .
+        docker push projekt1registry.azurecr.io/projekt1-api:${{ github.sha }}
+        docker push projekt1registry.azurecr.io/projekt1-api:latest
+
+    - name: Deploy to Container App
+      run: |
+        az containerapp update \
+          --name projekt1-api \
+          --resource-group projekt1-rg \
+          --image projekt1registry.azurecr.io/projekt1-api:${{ github.sha }}
+
+    - name: Restart Container App
+      run: |
+        az containerapp revision restart \
+          --name projekt1-api \
+          --resource-group projekt1-rg \
+          --revision $(az containerapp revision list --name projekt1-api --resource-group projekt1-rg --query "[0].name" -o tsv)
