@@ -2,12 +2,10 @@
   "name": "projekt1-api",
   "version": "3.0.0",
   "description": "API for React app with SQL Server database - Clean Architecture",
-  "main": "server-clean.js",
+  "main": "server-deployment.js",
   "scripts": {
-    "start": "node server-clean.js",
-    "start:legacy": "node server-legacy.js",
-    "dev": "nodemon server-clean.js",
-    "dev:legacy": "nodemon server-legacy.js"
+    "start": "node server-deployment.js",
+    "dev": "nodemon server-deployment.js"
   },
   "dependencies": {
     "express": "^4.18.2",
